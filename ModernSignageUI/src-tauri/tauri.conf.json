@@ -7,7 +7,7 @@
 		"frontendDist": "../dist",
 		"devUrl": "http://localhost:8081",
 		"beforeDevCommand": "expo start --web",
-		"beforeBuildCommand": "expo export --platform web"
+		"beforeBuildCommand": "npx expo export --platform web"
 	},
 	"app": {
 		"windows": [
