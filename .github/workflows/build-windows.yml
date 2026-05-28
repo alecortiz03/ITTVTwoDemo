@@ -13,6 +13,10 @@ jobs:
     permissions:
       contents: write
 
+    defaults:
+      run:
+        working-directory: ModernSignageUI
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -21,7 +25,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
@@ -33,3 +36,5 @@ jobs:
         uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          projectPath: ModernSignageUI/src-tauri
