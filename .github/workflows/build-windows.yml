@@ -37,4 +37,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          projectPath: ModernSignageUI/src-tauri
+          projectPath: ModernSignageUI
+
+      - name: Upload Windows build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-tauri-build
+          path: |
+            ModernSignageUI/src-tauri/target/release/bundle/msi/*.msi
+            ModernSignageUI/src-tauri/target/release/bundle/nsis/*.exe
