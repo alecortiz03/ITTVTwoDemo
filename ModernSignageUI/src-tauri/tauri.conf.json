@@ -2,12 +2,12 @@
 	"$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
 	"productName": "ittvtwodemo",
 	"version": "0.1.0",
-	"identifier": "com.tauri.dev",
+	"identifier": "com.ortiza4.ittvtwodemo",
 	"build": {
 		"frontendDist": "../dist",
 		"devUrl": "http://localhost:8081",
 		"beforeDevCommand": "expo start --web",
-		"beforeBuildCommand": "expo export --platfrom web"
+		"beforeBuildCommand": "expo export --platform web"
 	},
 	"app": {
 		"windows": [
@@ -15,8 +15,7 @@
 				"title": "ittvtwodemo",
 				"width": 1080,
 				"height": 1920,
-				"resizable": true,
-				"fullscreen": false
+				"fullscreen": true
 			}
 		],
 		"security": {
