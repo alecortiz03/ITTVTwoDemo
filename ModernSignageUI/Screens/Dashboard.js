@@ -16,40 +16,36 @@ export default function Dashboard() {
 				intensity={70}
 				style={styles.blurView}>
 				<DateTimeCard
-					positionVertical={30}
-					positionHorizontal={50}
 					borderRadius={60}
 					borderColor={'rgba(11, 11, 11, 0.59)00'}
 					borderWidth={6}
 					backgroundColor={'#090909c7'}
 					textColor={'#ffffff'}
+					style={{ marginTop: 30 }}
 				/>
 				<HoursCard
-					positionVertical={1100}
-					positionHorizontal={50}
 					borderRadius={60}
 					borderColor={'rgba(11, 11, 11, 0.59)00'}
 					borderWidth={6}
 					backgroundColor={'#090909c7'}
 					textColor={'#ffffff'}
+					style={{ marginTop: 30 }}
 				/>
 				<GuestWiFiCard
-					positionVertical={750}
-					positionHorizontal={50}
 					borderRadius={60}
 					borderColor={'rgba(11, 11, 11, 0.59)00'}
 					borderWidth={6}
 					backgroundColor={'#090909c7'}
 					textColor={'#ffffff'}
+					style={{ marginTop: 30 }}
 				/>
 				<WeatherCard
-					positionVertical={1200}
-					positionHorizontal={50}
 					borderRadius={60}
 					borderColor={'rgba(11, 11, 11, 0.59)00'}
 					borderWidth={6}
 					backgroundColor={'#090909c7'}
 					textColor={'#ffffff'}
+					style={{ marginTop: 30 }}
 				/>
 			</BlurView>
 		</ImageBackground>
@@ -59,7 +55,6 @@ export default function Dashboard() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: '#f0f0f0',
 		resizeMode: 'cover',
@@ -72,8 +67,6 @@ const styles = StyleSheet.create({
 		color: '#333',
 	},
 	blurView: {
-		flex: 1,
-		justifyContent: 'center',
 		alignItems: 'center',
 		width: '100%',
 		height: '100%',

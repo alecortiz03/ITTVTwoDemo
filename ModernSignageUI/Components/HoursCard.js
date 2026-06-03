@@ -51,12 +51,12 @@ export default function HoursCard({
 	positionHorizontal, // Horizontal position of the card (e.g., distance from left)
 }) {
 	const { width: screenWidth, height: screenHeight } = useWindowDimensions();
-	const componentWidth = Math.max(screenWidth * 0.69, 250); // Ensure a minimum card width for readability
+	const componentWidth = Math.max(screenWidth * 0.9, 250); // Ensure a minimum card width for readability
 	const componentHeight = Math.max(screenHeight * 0.29, 80); // Ensure a minimum card height for readability
 	const fontScaleFactor = Math.min(componentWidth, componentHeight); // Scale factor based on screen size (using iPhone 8 as reference)
-	const rowOneFontSize = Math.max(fontScaleFactor * 0.067, 12); // Font size for the first row of text, scaled based on the card size
-	const rowTwoFontSize = Math.max(fontScaleFactor * 0.067, 12); // Font size for the second row of text, scaled based on the card size
-	const rowThreeFontSize = Math.max(fontScaleFactor * 0.067, 12); // Font size for the third row of text, scaled based on the card size
+	const rowOneFontSize = Math.max(fontScaleFactor * 0.09, 12); // Font size for the first row of text, scaled based on the card size
+	const rowTwoFontSize = Math.max(fontScaleFactor * 0.09, 12); // Font size for the second row of text, scaled based on the card size
+	const rowThreeFontSize = Math.max(fontScaleFactor * 0.09, 12); // Font size for the third row of text, scaled based on the card size
 	const lineHeight = Math.max(componentHeight * 0.009, 4); // Height of the line, scaled based on the card size
 	const lineWidth = Math.max(componentWidth * 0.6, 100); // Width of the line, scaled based on the card size
 
@@ -66,15 +66,12 @@ export default function HoursCard({
 			style={[
 				styles.card,
 				{
-					position: 'absolute', // Position the card absolutely within its parent container
 					width: componentWidth, // Set the card width
 					height: componentHeight, // Set the card height
 					borderRadius: borderRadius, // Set the border radius
 					borderWidth: borderWidth, // Set the border width
 					borderColor: borderColor, // Set the border color
 					backgroundColor: backgroundColor, // Set the background color
-					bottom: positionVertical, // Set the vertical position
-					left: positionHorizontal, // Set the horizontal position
 				},
 				style,
 			]}>
@@ -173,6 +170,7 @@ const styles = StyleSheet.create({
 	},
 	hoursRowOne: {
 		fontWeight: 'bold', // Bold font for the first row of hours text
+		flexShrink: 1,
 
 		width: '90%', // Set width to 90% of the card width
 		textAlign: 'center', // Center text horizontally
@@ -180,7 +178,7 @@ const styles = StyleSheet.create({
 	},
 	hoursRowTwo: {
 		fontWeight: 'bold', // Bold font for the second row of hours text
-
+		flexShrink: 1,
 		width: '90%', // Set width to 90% of the card width
 		textAlign: 'center', // Center text horizontally
 		flexShrink: 1, // Allow text to shrink to fit within the card
@@ -190,7 +188,7 @@ const styles = StyleSheet.create({
 	},
 	hoursRowThree: {
 		fontWeight: 'bold', // Bold font for the third row of hours text
-
+		flexShrink: 1,
 		width: '90%', // Set width to 90% of the card width
 		textAlign: 'center', // Center text horizontally
 		flexShrink: 1, // Allow text to shrink to fit within the card

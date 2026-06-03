@@ -15,13 +15,12 @@ export default function GuestWiFiCard({
 	const [wifiSync, setWifiSync] = useState(false);
 	const [data, setData] = useState(null);
 
-	const componentWidth = Math.max(screenWidth * 0.69, 250);
-	const componentHeight = Math.max(screenHeight * 0.17, 180);
+	const componentWidth = Math.max(screenWidth * 0.9, 250);
+	const componentHeight = Math.max(screenHeight * 0.23, 180);
 
 	const scale = Math.min(componentWidth, componentHeight);
 
-	const titleFontSize = Math.max(scale * 0.17, 18);
-	const infoFontSize = Math.max(scale * 0.135, 12);
+	const infoFontSize = Math.max(scale * 0.15, 12);
 
 	const iconWidth = Math.max(componentWidth * 0.08, 24);
 	const iconHeight = Math.max(componentHeight * 0.08, 24);
@@ -119,8 +118,6 @@ export default function GuestWiFiCard({
 				{
 					width: componentWidth,
 					height: componentHeight,
-					bottom: positionVertical,
-					left: positionHorizontal,
 				},
 				style,
 			]}>
@@ -193,7 +190,6 @@ export default function GuestWiFiCard({
 
 const styles = StyleSheet.create({
 	container: {
-		position: 'absolute',
 		padding: 20,
 		borderRadius: 60,
 		borderWidth: 6,
@@ -212,19 +208,13 @@ const styles = StyleSheet.create({
 		minHeight: 0,
 	},
 
-	title: {
-		fontWeight: 'bold',
-		textAlign: 'center',
-		color: 'white',
-		width: '100%',
-	},
-
 	info: {
 		textAlign: 'center',
 		color: 'white',
 		width: '100%',
 		flexShrink: 1,
 		marginBottom: 4,
+		fontWeight: 'bold',
 	},
 
 	highlight: {

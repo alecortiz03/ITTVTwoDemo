@@ -13,9 +13,10 @@
 		"windows": [
 			{
 				"title": "ittvtwodemo",
-				"width": 1080,
-				"height": 1920,
-				"fullscreen": true
+				"width": 2160,
+				"height": 3840,
+				"fullscreen": false,
+				"resizable": false
 			}
 		],
 		"security": {

@@ -17,14 +17,14 @@ export default function WeatherCard({
 	const longitude = -113.50601718049307;
 
 	const { width, height } = useWindowDimensions();
-	const componentWidth = Math.max(width * 0.69, 250); // Ensure a minimum card width for readability
-	const componentHeight = Math.max(height * 0.11, 80); // Ensure a minimum card height for readability
+	const componentWidth = Math.max(width * 0.9, 250); // Ensure a minimum card width for readability
+	const componentHeight = Math.max(height * 0.3, 80); // Ensure a minimum card height for readability
 
 	const scale = Math.min(componentWidth, componentHeight); // Scale factor based on screen size (using iPhone 8 as reference)
 
 	const fontScale = Math.max(scale * 0.1, 12); // Base font size scaled based on the card width
-	const imageWidth = Math.max(scale, 50); // Image width scaled based on the card width
-	const imageHeight = Math.max(scale, 50); // Image height scaled based on the card height
+	const imageWidth = Math.max(scale * 0.5, 50); // Image width scaled based on the card width
+	const imageHeight = Math.max(scale * 0.5, 50); // Image height scaled based on the card height
 	const weatherUrl =
 		`https://api.open-meteo.com/v1/forecast` +
 		`?latitude=${latitude}` +
@@ -113,122 +113,85 @@ export default function WeatherCard({
 				styles.card,
 				style,
 				{
-					position: 'absolute',
-					backgroundColor: backgroundColor,
+					backgroundColor,
 					height: componentHeight,
 					width: componentWidth,
-					borderRadius: borderRadius,
-					borderWidth: borderWidth,
-					borderColor: borderColor,
-					top: positionVertical,
-					left: positionHorizontal,
+					borderRadius,
+					borderWidth,
+					borderColor,
 				},
 			]}>
 			{weather ?
-				<View style={styles.contentContainer}>
-					{weatherInfo?.image && (
-						<Image
-							source={{ uri: weatherInfo.image }}
+				<>
+					<View style={styles.weatherRow}>
+						{weatherInfo?.image && (
+							<Image
+								source={{ uri: weatherInfo.image }}
+								style={[
+									styles.image,
+									{
+										width: imageWidth,
+										height: imageHeight,
+									},
+								]}
+								resizeMode='contain'
+							/>
+						)}
+						<Text
 							style={[
-								styles.image,
+								styles.weatherType,
+								{ fontSize: fontScale * 0.9, color: textColor },
+							]}>
+							{weatherInfo.title}
+						</Text>
+						<Text
+							numberOfLines={1}
+							adjustsFontSizeToFit
+							style={[
+								styles.temperature,
 								{
-									position: 'absolute',
-									left: componentWidth * 0.04,
-									bottom: componentHeight * 0.01,
-									width: imageWidth,
-									height: imageHeight,
+									fontSize: fontScale * 0.9,
+									color: textColor,
 								},
-							]}
-							resizeMode='contain'
-						/>
-					)}
-					<Text
-						numberOfLines={1}
-						adjustsFontSizeToFit
-						style={[
-							styles.weatherType,
-							{
-								position: 'absolute',
-								left: componentWidth * 0.125,
-								bottom: componentHeight * 0.12,
-								fontSize: fontScale * 0.9,
-								color: textColor,
-							},
-						]}>
-						{weatherInfo.title}
-					</Text>
+							]}>
+							{Math.round(weather.temperature_2m)}°C
+						</Text>
+					</View>
+					<View style={styles.lineRow}>
+						<View
+							style={{
+								backgroundColor: 'rgb(255, 255, 255)',
+								height: '60%',
+								width: '100%',
+							}}></View>
+					</View>
+					<View style={styles.detailsRow}>
+						<Text
+							style={[
+								styles.feelsLike,
+								{ fontSize: fontScale, color: textColor },
+							]}>
+							Feels like {Math.round(weather.apparent_temperature)}°C
+						</Text>
 
-					<Text
-						numberOfLines={1}
-						adjustsFontSizeToFit
-						style={[
-							styles.temperature,
-							{
-								position: 'absolute',
-								right: componentWidth * 0.275,
-								bottom: componentHeight * 0.01,
-								fontSize: fontScale * 0.9,
-								color: textColor,
-							},
-						]}>
-						{Math.round(weather.temperature_2m)}°C
-					</Text>
+						<Text
+							style={[
+								styles.windSpeed,
+								{ fontSize: fontScale, color: textColor },
+							]}>
+							Wind {Math.round(weather.wind_speed_10m)} km/h
+						</Text>
 
-					<Text
-						numberOfLines={1}
-						adjustsFontSizeToFit
-						style={[
-							styles.feelsLike,
-							{
-								position: 'absolute',
-								left: componentWidth * 0.2,
-								bottom: componentHeight * 0.53,
-								fontSize: fontScale * 1.6,
-								color: textColor,
-							},
-						]}>
-						Feels like {Math.round(weather.apparent_temperature)}°C
-					</Text>
-
-					<Text
-						numberOfLines={1}
-						adjustsFontSizeToFit
-						style={[
-							styles.windSpeed,
-							{
-								position: 'absolute',
-								right: componentWidth * 0.15,
-								bottom: componentHeight * 0.3,
-								fontSize: fontScale * 1.3,
-								color: textColor,
-							},
-						]}>
-						Wind {Math.round(weather.wind_speed_10m)} km/h
-					</Text>
-
-					<Text
-						numberOfLines={1}
-						adjustsFontSizeToFit
-						style={[
-							styles.humidity,
-							{
-								position: 'absolute',
-								left: componentWidth * 0.2,
-								bottom: componentHeight * 0.09,
-								fontSize: fontScale * 1.3,
-								color: textColor,
-							},
-						]}>
-						Humidity {weather.relative_humidity_2m}%
-					</Text>
-				</View>
-			:	<Text
-					style={[
-						styles.loadingText,
-						{
-							fontSize: fontScale * 0.6,
-						},
-					]}>
+						<Text
+							style={[
+								styles.humidity,
+								{ fontSize: fontScale, color: textColor },
+							]}>
+							Humidity {weather.relative_humidity_2m}%
+						</Text>
+					</View>
+				</>
+			:	<Text style={[styles.loadingText, { fontSize: fontScale * 0.6 }]}>
 					{message}
 				</Text>
 			}
@@ -243,17 +206,24 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.8,
 		shadowRadius: 4,
 		elevation: 5,
-		paddingHorizontal: 25,
-		paddingVertical: 20,
+		flexDirection: 'row',
 	},
-
-	contentContainer: {
+	weatherRow: {
 		flex: 1,
-		flexDirection: 'column',
 		alignItems: 'center',
-		justifyContent: 'flex-start',
+		justifyContent: 'center',
+	},
+	detailsRow: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		paddingHorizontal: 30,
+		rowGap: 60,
+	},
+	lineRow: {
+		width: '0.6%',
 		height: '100%',
-		width: '100%',
+		justifyContent: 'center',
 	},
 
 	feelsLike: {
@@ -264,6 +234,7 @@ const styles = StyleSheet.create({
 		textShadowColor: 'rgba(0, 0, 0, 0.75)',
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 4,
+		flexShrink: 1,
 	},
 
 	temperature: {
@@ -286,7 +257,7 @@ const styles = StyleSheet.create({
 		textShadowRadius: 4,
 		textAlign: 'center',
 		width: '100%',
-		flexWrap: 'wrap',
+		flexShrink: 1,
 	},
 
 	image: {},
@@ -307,5 +278,6 @@ const styles = StyleSheet.create({
 		textShadowColor: 'rgba(0, 0, 0, 0.75)',
 		textShadowOffset: { width: -1, height: 1 },
 		textShadowRadius: 2,
+		flexShrink: 1,
 	},
 });

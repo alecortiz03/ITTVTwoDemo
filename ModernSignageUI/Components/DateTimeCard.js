@@ -46,10 +46,10 @@ export default function DateTimeCard({
 	const [currentTime, setCurrentTime] = useState('');
 	const { width: screenWidth, height: screenHeight } = useWindowDimensions();
 	// Font Size
-	const componentWidth = Math.max(screenWidth * 0.7, 250); // Card width is 70% of screen width or minimum 250
+	const componentWidth = Math.max(screenWidth * 0.9, 250); // Card width is 70% of screen width or minimum 250
 	const componentHeight = Math.max(screenHeight * 0.1, 80);
 	const fontScaleFactor = Math.min(componentWidth, componentHeight); // Scale factor based on screen size (using iPhone 8 as reference)
-	const fontSize = Math.max(fontScaleFactor * 0.22, 16); // Font size is 10% of card width
+	const fontSize = Math.max(fontScaleFactor * 0.27, 16); // Font size is 10% of card width
 	const textPadding = componentWidth * 0.05; // Text padding is 5% of card width
 	useEffect(() => {
 		// ------------ updateTime function ------------
@@ -74,7 +74,7 @@ export default function DateTimeCard({
 			});
 			// Format the time string as "Day, Time - Date"
 			// Example: "Monday, 3:45 PM - September 15, 2024"
-			const formattedTime = `${day}   ${time}    ${date}`;
+			const formattedTime = `${day}, ${time}  -  ${date}`;
 			// Update the currentTime state with the formatted time string
 			setCurrentTime(formattedTime);
 		};
@@ -110,8 +110,6 @@ export default function DateTimeCard({
 			]}>
 			{/* ====== Card Text Component ====== */}
 			<Text
-				numberOfLines={2}
-				adjustsFontSizeToFit
 				minimumFontScale={0.5}
 				maxFontSizeMultiplier={1}
 				style={[
@@ -136,9 +134,12 @@ export default function DateTimeCard({
 const styles = StyleSheet.create({
 	// Card container styles
 	card: {
-		position: 'absolute', // Position the card absolutely for custom placement
-		alignItems: 'center', // Center content horizontally
-		justifyContent: 'center', // Center content vertically
+		flexWrap: 'wrap', // Allow content to wrap within the card
+		flexDirection: 'row', // Arrange content in a row
+		justifyContent: 'center', // Center content horizontally
+		alignItems: 'baseline', // Align items along the baseline
+		alignContent: 'center', // Center content vertically
+
 		shadowColor: '#000', // Shadow color
 		shadowOffset: { width: 0, height: 2 }, // Shadow offset
 		shadowOpacity: 0.8, // Shadow opacity
@@ -148,7 +149,6 @@ const styles = StyleSheet.create({
 	// Time text styles
 	text: {
 		fontWeight: 'bold', // Bold font for better visibility
-		width: '100%',
 		flexShrink: 1,
 		textAlign: 'center', // Center the text horizontally
 		includeFontPadding: false, // Remove extra padding around text for better vertical centering
