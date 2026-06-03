@@ -20,7 +20,7 @@ export default function GuestWiFiCard({
 
 	const scale = Math.min(componentWidth, componentHeight);
 
-	const infoFontSize = Math.max(scale * 0.15, 12);
+	const infoFontSize = Math.max(scale * 0.12, 12);
 
 	const iconWidth = Math.max(componentWidth * 0.08, 24);
 	const iconHeight = Math.max(componentHeight * 0.08, 24);
