@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
 	},
 
 	header: {
-		flex: 1,
+		paddingTop: 12,
 		width: '100%',
 		justifyContent: 'center',
 		alignItems: 'center',

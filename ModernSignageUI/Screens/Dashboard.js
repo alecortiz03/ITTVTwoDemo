@@ -45,7 +45,7 @@ export default function Dashboard() {
 					borderWidth={6}
 					backgroundColor={'#090909c7'}
 					textColor={'#ffffff'}
-					style={{ marginTop: 30 }}
+					style={{ marginTop: 30, marginBottom: 15 }}
 				/>
 			</BlurView>
 		</ImageBackground>
@@ -60,6 +60,7 @@ const styles = StyleSheet.create({
 		resizeMode: 'cover',
 		height: '100%',
 		width: '100%',
+		justifyContent: 'space-evenly',
 	},
 	text: {
 		fontSize: 24,
