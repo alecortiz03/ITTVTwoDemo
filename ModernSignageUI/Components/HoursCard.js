@@ -54,6 +54,7 @@ export default function HoursCard({
 	const componentWidth = Math.max(screenWidth * 0.9, 250); // Ensure a minimum card width for readability
 	const componentHeight = Math.max(screenHeight * 0.29, 80); // Ensure a minimum card height for readability
 	const fontScaleFactor = Math.min(componentWidth, componentHeight); // Scale factor based on screen size (using iPhone 8 as reference)
+	const titleFontSize = Math.max(fontScaleFactor * 0.12, 16);
 	const rowOneFontSize = Math.max(fontScaleFactor * 0.09, 12); // Font size for the first row of text, scaled based on the card size
 	const rowTwoFontSize = Math.max(fontScaleFactor * 0.09, 12); // Font size for the second row of text, scaled based on the card size
 	const rowThreeFontSize = Math.max(fontScaleFactor * 0.09, 12); // Font size for the third row of text, scaled based on the card size
@@ -83,7 +84,7 @@ export default function HoursCard({
 					style={[
 						styles.titleText,
 						{
-							fontSize: screenWidth > 400 ? 32 : 16,
+							fontSize: titleFontSize,
 							color: textColor,
 							textDecorationLine: 'underline',
 						},
